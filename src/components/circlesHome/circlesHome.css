@@ -1,0 +1,9 @@
+.backgraundCircles{
+    background-color: #99d06e;
+    margin-top: -0.2rem;
+}
+
+@media (max-width: 767px) {
+    .backgraundCircles {
+      display: none; /* Hide the element */
+    }}

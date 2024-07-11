@@ -1,0 +1,12 @@
+.carousel-image {
+    width: 100%;
+  }
+  @media (max-width: 767px){
+    .carousel-image {
+      transform: scale(2);
+        margin-left: 12%;
+        height: 15rem;
+        object-fit: contain;
+        margin-top: -1rem;
+    }
+  }
