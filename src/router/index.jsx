@@ -4,6 +4,9 @@ import { Index } from "../pages/Index";
 import { Login } from "../pages/Login";
 import getAllProducts from "../API/loaderProducts";
 import { ProductsByCategory } from "../pages/ProductsByCategory";
+import getProductsByCategory from "../API/loaderProductsByCategory";
+import { DetailProduct } from "../pages/DetailProduct";
+import getDetailProduct from "../API/loaderDetailProduct";
 
 export const router = createBrowserRouter([
     {
@@ -17,11 +20,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <Login />
+                element: <Login />,
             },
             {
                 path: '/products/:category',
-                element: <ProductsByCategory />
+                element: <ProductsByCategory />,
+                loader: getProductsByCategory
+            },
+            {
+                path: '/product/:id',
+                element: <DetailProduct />,
+                loader: getDetailProduct,
             },
         ]
     }

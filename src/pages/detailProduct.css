@@ -1,0 +1,26 @@
+.product-detail {
+    margin-top: 20px;
+    background-color: white;
+  }
+  
+  .product-image img {
+    width: 50%;
+    padding: 1rem;
+    background: #fff;
+  }
+  
+  .product-info {
+    padding: 20px;
+  }
+  
+  .product-info h2 {
+    margin-bottom: 20px;
+  }
+  
+  .product-info h3 {
+    margin-bottom: 20px;
+  }
+  
+  .product-info p {
+    margin-bottom: 20px;
+  }

@@ -19,7 +19,7 @@ export const CardsCategory = () => {
           {categories.map((category, index) => (
             <Col key={index} xs={12} md={3}  className="d-flex justify-content-center mb-4">
               <Card style={{ width: "12rem", borderRadius: '1rem' }} className="border-0 card-hover">
-                <Link to={`#`}>
+                <Link to={`/products/${category.title}`}>
                   <Card.Img className="p-4" style={{ height: '12rem', objectFit: 'contain' }} variant="top" src={category.image} alt={category.title} />
                 </Link>
                 <hr style={{ width: '80%', margin: 'auto' }} />
