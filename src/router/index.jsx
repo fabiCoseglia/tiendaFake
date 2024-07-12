@@ -7,6 +7,7 @@ import { ProductsByCategory } from "../pages/ProductsByCategory";
 import getProductsByCategory from "../API/loaderProductsByCategory";
 import { DetailProduct } from "../pages/DetailProduct";
 import getDetailProduct from "../API/loaderDetailProduct";
+import loginLoader from "../API/loaderLogin";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />,
+                loader: loginLoader
             },
             {
                 path: '/products/:category',
