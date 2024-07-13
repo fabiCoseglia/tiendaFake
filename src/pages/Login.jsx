@@ -1,13 +1,51 @@
-import { Button, Form, Image } from 'react-bootstrap';
-import login from '../assets/login.png'
-import { Form as RouterForm } from 'react-router-dom';
+import { Button, Form, Image, } from 'react-bootstrap';
+import logo from '../assets/login.png'
 import Swal from 'sweetalert2';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  //handles
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    if (email === "challenge@alkemy.org" && password === "react") {
+      //llamado a la API
+      axios
+        .post("http://challenge-react.alkemy.org", { email, password })
+        .then((res) => {
+          const data = {
+            token: res.data.token,
+            username: "TiendaUser",
+            cart: [],
+          };
+          Swal.fire({
+            text: "Login Success!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          sessionStorage.setItem("token", data.token);
+          sessionStorage.setItem("username", data.username);
+          sessionStorage.setItem("cart", data.cart);
+          return navigate("/");
+        });
+      //llamado a la API
+    }else{
+     return Swal.fire({
+        text: "Incorrect credentialss",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  }
+
   
   const handleInfoButton= ()=>{
     Swal.fire({
@@ -18,50 +56,24 @@ export const Login = () => {
   }
 
   return (
-    <div
-      className="container d-flex flex-column justify-content-center align-items-center mt-4 shadow-md"
-      style={{
-        backgroundColor: "white",
-        width: "40vh",
-        borderRadius: "1rem",
-        height: "80vh",
-      }}
-    >
-      <Image src={login} width={"135rem"} className="p-2" />
-      <RouterForm method="post" action="/login" className="m-4">
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-          <Form.Label>Email:</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formGroupPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Button className="btn btn-dark mt-4" type="submit" variant="dark">
-          Login
-        </Button>
-        <Button
-          className="btn btn-dark mt-4 mx-2"
-          onClick={handleInfoButton}
-          variant="dark"
-        >
-          Info
-        </Button>
-      </RouterForm>
-    </div>
+    <Form onSubmit={handleSubmit} className="container d-flex flex-column justify-content-center align-items-center mt-5" style={{height:'55vh',width:'40vh',backgroundColor:'white',borderRadius:'1rem'}}>
+      <Image src={logo}  width={'100rem'}/>
+      <Form.Group className="mb-3" controlId="formGroupEmail" >
+        <Form.Label>Email:</Form.Label>
+        <Form.Control type="text" placeholder="Ingrese email" name='email' onChange={(e) => setEmail(e.target.value)}  />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formGroupPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control type="password" placeholder="Password" name='password' onChange={(e) => setPassword(e.target.value)}/>
+      </Form.Group>
+      <div className='d-flex mt-2 gap-2'>
+      <Button type='submit' variant='dark'>Login</Button>
+      <Button variant='dark' onClick={handleInfoButton}>Info</Button>
+      </div>
+
+
+      
+    </Form>
+
   );
 }
