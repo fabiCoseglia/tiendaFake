@@ -1,10 +1,19 @@
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import './detailProduct.css'
+import { useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
 
 export const DetailProduct = () => {
   let navigation = useNavigation();
   const { product } = useLoaderData();
+
+  //cart context
+  const {addToCart} = useContext(CartContext)
+  const handleAddToCart = () =>{
+    addToCart(product)
+  }
+
   return (
     <Container className="product-detail mt-5">
       {navigation === "loading" ? (
@@ -29,7 +38,7 @@ export const DetailProduct = () => {
             <h4 className="text-success">{`$${product.price}`}</h4>
             <small className="text-danger">15%OFF</small>
             <p className="mt-4">{product.description}</p>
-            <Link className="btn btn-primary mt-4">Añadir al carrito</Link>
+            <Link className="btn btn-primary mt-4"onClick={handleAddToCart}>Añadir al carrito</Link>
           </Col>
         </Row>
       )}

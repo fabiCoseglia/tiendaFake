@@ -22,7 +22,6 @@ export const Login = () => {
           const data = {
             token: res.data.token,
             username: "TiendaUser",
-            cart: [],
           };
           Swal.fire({
             text: "Login Success!",

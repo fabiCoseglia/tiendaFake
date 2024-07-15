@@ -3,7 +3,6 @@ import axios from "axios";
 const API_BASE_URL =  'https://fakestoreapi.com';
 
 const getDetailProduct = async ({params}) =>{
-    console.log(params);
     try {
         const res = await axios.get(`${API_BASE_URL}/products/${params.id}`);
         if(res){
