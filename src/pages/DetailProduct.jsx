@@ -3,6 +3,7 @@ import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import './detailProduct.css'
 import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
+import Swal from "sweetalert2";
 
 export const DetailProduct = () => {
   let navigation = useNavigation();
@@ -10,9 +11,20 @@ export const DetailProduct = () => {
 
   //cart context
   const {addToCart} = useContext(CartContext)
-  const handleAddToCart = () =>{
-    addToCart(product)
-  }
+  const handleAddToCart = () => {
+    const token = sessionStorage.token;
+
+    if (token) {
+      return addToCart(product);
+    } else {
+      return Swal.fire({
+        text: "You must Login to purchase",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
 
   return (
     <Container className="product-detail mt-5">

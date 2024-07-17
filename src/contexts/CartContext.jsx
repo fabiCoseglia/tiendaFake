@@ -17,8 +17,21 @@ const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCart((prevCart) => {
-      const updatedCart = [...prevCart, product];
-      return updatedCart;
+      const existingProductIndex = prevCart.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingProductIndex >= 0) {
+        const updatedCart = prevCart.map((item, index) =>
+          index === existingProductIndex
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+        return updatedCart;
+      } else {
+        return [...prevCart, { ...product}];
+
+      }
     });
   };
 
