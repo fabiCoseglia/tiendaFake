@@ -13,8 +13,19 @@ export const DetailProduct = () => {
   const {addToCart} = useContext(CartContext)
   const handleAddToCart = () => {
     const token = sessionStorage.token;
-
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      iconColor: 'success',
+      showConfirmButton: false,
+      timer: 1600,
+      timerProgressBar: true,
+    })
     if (token) {
+      Toast.fire({
+        icon: 'success',
+        title: 'product added to cart',
+      })
       return addToCart(product);
     } else {
       return Swal.fire({
