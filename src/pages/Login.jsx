@@ -1,16 +1,19 @@
 import { Button, Form, Image, } from 'react-bootstrap';
 import logo from '../assets/login.png'
 import Swal from 'sweetalert2';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { CartContext } from '../contexts/CartContext';
 
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
+  const { setIsLoggedIn } = useContext(CartContext);
+  const navigate = useNavigate();
+ 
   //handles
   const handleSubmit = async (e) =>{
     e.preventDefault();
@@ -31,8 +34,9 @@ export const Login = () => {
           });
           sessionStorage.setItem("token", data.token);
           sessionStorage.setItem("username", data.username);
-          sessionStorage.setItem("cart", data.cart);
-          return navigate("/");
+          setIsLoggedIn(true);
+          navigate('/')
+
         });
       //llamado a la API
     }else{
@@ -59,7 +63,7 @@ export const Login = () => {
       <Image src={logo}  width={'100rem'}/>
       <Form.Group className="mb-3" controlId="formGroupEmail" >
         <Form.Label>Email:</Form.Label>
-        <Form.Control type="text" placeholder="Ingrese email" name='email' onChange={(e) => setEmail(e.target.value)}  />
+        <Form.Control type="text" placeholder="Email" name='email' onChange={(e) => setEmail(e.target.value)}  />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formGroupPassword">
         <Form.Label>Password:</Form.Label>
@@ -69,9 +73,6 @@ export const Login = () => {
       <Button type='submit' variant='dark'>Login</Button>
       <Button variant='dark' onClick={handleInfoButton}>Info</Button>
       </div>
-
-
-      
     </Form>
 
   );

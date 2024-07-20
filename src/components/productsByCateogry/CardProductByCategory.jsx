@@ -17,7 +17,7 @@ export const CardProductByCategory = () => {
         <Row className="d-flex justify-content-center align-items-center gap-4">
       {products.map((product) => (
         <Card key={product.id} style={{ width: "22rem", borderRadius: '1rem' }} className="border-0 card-hover">
-          <Link to={`#`}>
+          <Link to={`/product/${product.id}`}>
             <Card.Img className="p-4" style={{ height: '12rem', objectFit: 'contain' }} variant="top" src={product.image} alt={product.title} />
           </Link>
           <hr style={{ width: '100%', margin: 'auto' }} />

@@ -18,7 +18,7 @@ export const DetailProduct = () => {
       position: 'top-end',
       iconColor: 'success',
       showConfirmButton: false,
-      timer: 1600,
+      timer: 1800,
       timerProgressBar: true,
     })
     if (token) {
@@ -61,7 +61,7 @@ export const DetailProduct = () => {
             <h4 className="text-success">{`$${product.price}`}</h4>
             <small className="text-danger">15%OFF</small>
             <p className="mt-4">{product.description}</p>
-            <Link className="btn btn-primary mt-4"onClick={handleAddToCart}>Añadir al carrito</Link>
+            <Link className="btn btn-primary mt-4"onClick={handleAddToCart}>Add to Cart</Link>
           </Col>
         </Row>
       )}

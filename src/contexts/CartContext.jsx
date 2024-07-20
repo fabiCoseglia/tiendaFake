@@ -5,10 +5,16 @@ const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const storedCart = JSON.parse(sessionStorage.getItem('cart')) || [];
     setCart(storedCart);
+
+    //auth
+    if (sessionStorage.getItem('token')) {
+      setIsLoggedIn(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -40,7 +46,7 @@ const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isLoggedIn,setIsLoggedIn }}>
       {children}
     </CartContext.Provider>
   );
