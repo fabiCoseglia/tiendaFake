@@ -20,5 +20,4 @@
 
 ### Enlace al Proyecto
 
-* Puedes ver el proyecto en funcionamiento [aquí](URL proyecto).
-* Para más detalles, visita el repositorio del proyecto en GitHub [aquí](URL repositorio github).
+* Puedes ver el proyecto en funcionamiento [https://tienda-fake-bay.vercel.app/]
